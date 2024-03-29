@@ -1,4 +1,4 @@
 curl --request GET \
   --url https://google.com/ \
-  --header 'User-Agent: insomnia/8.6.1' \
-  --cookie '1P_JAR=2024-03-29-01; AEC=Ae3NU9OOD6GERsDJBQHmXJDDVJAI6bpCgJf1T7EJfTdil2hM2dfJlTz4bg; NID=512%3DD2CWjN2xeHQIjm2HBHu-kk2UcUXbhYg6O-e3rkqvCKMAZ0s3pPsnIWSKRSOU3z41e5oW2JXrqYL9VWaG3EqdVEhwSFyK9i2HBQ-YivTvOlm2S4K4Wz9urHOs73mWUap0r05BnQdeDwYDiJJPR-HrrSRJDcVF9f5EYBa79rb_ibk'ls
+  --header 'Accept: application/json' \
+  --cookie '1P_JAR=2024-03-29-01; AEC=Ae3NU9OOD6GERsDJBQHmXJDDVJAI6bpCgJf1T7EJfTdil2hM2dfJlTz4bg; NID=512%3DEn1fhNuSuidsLMH-_f0OYeMsJvP32Vrf29WVogvRvfg0I37fjh5ed3wYvKzKrYZEixB2WyFDNKDMqGdA_3seGgaom7qWKCWGeFz8jYXtvmpwPzWmqt4YfQ0OXBnfLchoteqKB3a-gqKVClskhwz5qAn84H2pH2evdhrxWrRizcI'
