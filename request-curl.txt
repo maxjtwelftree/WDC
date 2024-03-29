@@ -1,4 +1,4 @@
-curl --request GET \
+curl --request HEAD \
   --url https://google.com/ \
-  --header 'Accept: application/json' \
+  --header 'Cookie: 1P_JAR=2024-03-29-01; AEC=Ae3NU9OOD6GERsDJBQHmXJDDVJAI6bpCgJf1T7EJfTdil2hM2dfJlTz4bg; NID=512%3DEn1fhNuSuidsLMH-_f0OYeMsJvP32Vrf29WVogvRvfg0I37fjh5ed3wYvKzKrYZEixB2WyFDNKDMqGdA_3seGgaom7qWKCWGeFz8jYXtvmpwPzWmqt4YfQ0OXBnfLchoteqKB3a-gqKVClskhwz5qAn84H2pH2evdhrxWrRizcI'
   --cookie '1P_JAR=2024-03-29-01; AEC=Ae3NU9OOD6GERsDJBQHmXJDDVJAI6bpCgJf1T7EJfTdil2hM2dfJlTz4bg; NID=512%3DEn1fhNuSuidsLMH-_f0OYeMsJvP32Vrf29WVogvRvfg0I37fjh5ed3wYvKzKrYZEixB2WyFDNKDMqGdA_3seGgaom7qWKCWGeFz8jYXtvmpwPzWmqt4YfQ0OXBnfLchoteqKB3a-gqKVClskhwz5qAn84H2pH2evdhrxWrRizcI'
