@@ -1,156 +1,220 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 
+/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-let temp_timestamp = '';
-let counter = 1;
-let d1_logs = '';
-let page_counter = 0;
-let color_counter = 0;
-let log_entries = [];
-let accept_counter = 0;
-let dog_counter = 0;
-
+// 3.1 and 4,1
+var temp = '';
 router.get('/last.txt', function(req, res, next) {
   res.set('Content-Type', 'text/plain', 'charset=UTF-8');
-  res.send(temp_timestamp);
-  temp_timestamp = new Date().toString();
+  res.send(temp);
+  temp = new Date().toString();
 });
 
-router.get('/color.html', function(req, res, next) {
-  const number = counter % 4;
-  let color = '';
-  if (number === 0) {
-    color = 'blue';
+// 3.2
+var counter = 1;
+router.get('/color.html', function(req,res,next){
+  var number = counter%4;
+  var html = "";
+  if (number === 0){
+    html = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset ="UTF-8">
+        <title>Express</title>
+      </head>
+      <body>
+        <h1 style="color: blue">Blue</h1>
+      </body>
+      </html>
+    `;
   } else if (number === 3) {
-    color = 'green';
+    html = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset ="UTF-8">
+        <title>Express</title>
+      </head>
+      <body>
+        <h1 style="color: green">Green</h1>
+      </body>
+      </html>
+    `;
   } else if (number === 2) {
-    color = 'yellow';
+    html = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset ="UTF-8">
+        <title>Express</title>
+      </head>
+      <body>
+        <h1 style="color: yellow">Yellow</h1>
+      </body>
+      </html>
+    `;
   } else {
-    color = 'red';
+    html = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset ="UTF-8">
+        <title>Express</title>
+      </head>
+      <body>
+        <h1 style="color: red">Red</h1>
+      </body>
+      </html>
+    `;
   }
-  const html = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <title>Express</title>
-    </head>
-    <body>
-    <h1 style="color: ${color}">${color}</h1>
-    </body>
-    </html>`;
   res.send(html);
   counter++;
 });
 
-router.get('/log.html', function(req, res, next) {
-  d1_logs += `<li>${new Date().toString()}</li>`;
-  const html = `
+// 3.3
+var d1 = "";
+router.get('/log.html', function(req,res,next){
+  d1 += '<li>' + new Date().toString() + '</li>';
+  var html = "";
+  html = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <title>Express</title>
+      <meta charset ="UTF-8">
+      <title>Express</title>
     </head>
     <body>
-    <ul>${d1_logs}</ul>
+      <ul>
+        ${d1}
+      </ul>
     </body>
-    </html>`;
+    </html>
+  `;
   res.send(html);
 });
 
-router.get('/first.html', function(req, res, next) {
-  const html = `
+// 3.4
+let pageCount = 0;
+router.get('/first.html', function(req,res,next){
+  var html = "";
+  html = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <title>Express</title>
+      <meta charset ="UTF-8">
+      <title>Express</title>
     </head>
     <body>
-    <h1>Welcome</h1>
-    <a href="/main.html">Click on this link!</a>
+      <h1>Welcome</h1>
+      <a href="/main.html">Click on this link!</a>
     </body>
-    </html>`;
-  if (page_counter === 0) {
+    </html>
+  `;
+  if (pageCount === 0) {
     res.send(html);
-    page_counter++;
+    pageCount++;
   } else {
     res.redirect('/main.html');
   }
 });
 
-router.get('/main.html', function(req, res, next) {
-  const html = `
+router.get('/main.html', function(req,res,next){
+  var html = "";
+  html = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <title>Express</title>
+      <meta charset ="UTF-8">
+      <title>Express</title>
     </head>
     <body>
-    <h1>My main site</h1>
-    <p>Me love Me-Me. MEME!!</p>
+      <h1>My main site</h1>
+      <p>Me love Me-Me. MEME!!</p>
     </body>
-    </html>`;
-  if (page_counter === 0) {
+    </html>
+  `;
+  if (pageCount === 0) {
     res.redirect('/first.html');
   } else {
     res.send(html);
-    page_counter++;
+    pageCount++;
   }
 });
 
+// 4.2
+var num = 0;
 router.get('/color.txt', function(req, res, next) {
-  let color = '';
-  if (color_counter % 4 === 0) {
-    color = 'red';
-  } else if (color_counter % 4 === 3) {
-    color = 'blue';
-  } else if (color_counter % 4 === 2) {
-    color = 'green';
-  } else {
-    color = 'yellow';
-  }
+  var color = "";
   res.set('Content-Type', 'text/plain', 'charset=UTF-8');
+  if (num % 4 === 0) {
+    color = "red";
+  } else if (num % 4 === 3) {
+    color = "blue";
+  } else if (num % 4 === 2) {
+    color = "green";
+  } else {
+    color = "yellow";
+  }
   res.send(String(color));
-  color_counter++;
+  num++;
 });
 
+// 4.3
+var dates = [];
 router.get('/log.json', function(req, res, next) {
-  const d = { date: new Date().toString() };
-  log_entries.push(d);
-  res.json(log_entries);
+  let d = { date: new Date().toString() };
+  dates.push(d);
+  res.json(dates);
 });
 
 router.get('/log-ro.json', function(req, res, next) {
-  res.json(log_entries);
+  res.json(dates);
 });
 
+// 4.5
+var acceptCount = 0;
 router.get('/accept', function(req, res, next) {
   res.sendStatus(200);
-  accept_counter++;
+  acceptCount++;
 });
 
 router.get('/content.ajax', function(req, res, next) {
-  if (accept_counter === 0) {
+  if(acceptCount === 0) {
     res.sendStatus(403);
   } else {
-    const html = `
+    var html = '';
+    html = `
       <p>Terms and conditions supplied</p>
-      <p>Terms and conditions supplied</p>`;
+      <p>Terms and conditions supplied</p>
+    `;
     res.send(html);
   }
 });
 
+// 4.6
+var images = [
+    { uri:'photo-1539154444419-e31272d30a31.jpg', description:'cute dog near grass' },
+    { uri:'photo-1553882809-a4f57e59501d.jpg', description:'black and tan GSD dog' },
+    { uri:'photo-1554196721-b507d7e86ee9.jpg', description:'beast grey dog standing in grass' },
+    { uri:'photo-1555661059-7e755c1c3c1d.jpg', description:'black dog' },
+    { uri:'photo-1555991415-1b04a71f18c5.jpg', description:'cute white dog with people' },
+    { uri:'photo-1558121591-b684092bb548.jpg', description:'dog chillin' },
+    { uri:'photo-1559440165-065646588e9a.jpg', description:'person and dog' },
+    { uri:'photo-1560160643-7c9c6cb07a8b.jpg', description:'another cute dog' },
+    { uri:'photo-1562220058-1a0a019ab606.jpg', description:'another dog chillin' },
+    { uri:'photo-1565194481104-39d1ee1b8bcc.jpg', description:'another grey dog' }
+];
+
+var dogCount = 0;
 router.get('/images.json', function(req, res, next) {
-  const i = dog_counter % 10;
+  var i = dogCount % 10;
   res.json(images[i]);
-  dog_counter++;
+  dogCount++;
 });
 
 module.exports = router;

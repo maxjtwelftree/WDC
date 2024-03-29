@@ -1,8 +1,8 @@
 function getDateTask4_1() {
-    var xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("P1").innerHTML = "This page was last viewed " + this.responseText;
+        if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("P1").innerHTML = `This page was last viewed ${this.responseText}`;
         }
     };
     xhttp.open("GET", "/last.txt", true);
@@ -10,25 +10,25 @@ function getDateTask4_1() {
 }
 
 function getColors() {
-    var xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var color = this.responseText;
-            document.getElementById("header").innerHTML = color;
-            document.getElementById("header").style.color = color;
+        if (this.readyState === 4 && this.status === 200) {
+            const color = this.responseText;
+            const header = document.getElementById("header");
+            header.innerHTML = color;
+            header.style.color = color;
         }
     };
     xhttp.open("GET", "/color.txt", true);
     xhttp.send();
 }
 
-// 4.3
-var dates = [];
+let dates = [];
 
 function log() {
-    var xmlhttp = new XMLHttpRequest();
+    const xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             dates = JSON.parse(this.responseText);
             updateDates();
             setInterval(logRo, 10000);
@@ -39,9 +39,9 @@ function log() {
 }
 
 function logRo() {
-    var xmlhttp = new XMLHttpRequest();
+    const xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             dates = JSON.parse(this.responseText);
             updateDates();
         }
@@ -51,14 +51,13 @@ function logRo() {
 }
 
 function updateDates() {
-    var ul = document.getElementsByTagName("ul")[0];
+    const ul = document.getElementsByTagName("ul")[0];
     ul.innerHTML = "";
-    for (var i = 0; i < dates.length; i++) {
-        let d1 = dates[i].date;
-        var li = document.createElement("li");
-        li.appendChild(document.createTextNode(d1));
+    dates.forEach(date => {
+        const li = document.createElement("li");
+        li.textContent = date.date;
         ul.appendChild(li);
-    }
+    });
 }
 
 function contact() {
@@ -74,9 +73,9 @@ function about() {
 }
 
 function sendRequest(url) {
-    var xmlhttp = new XMLHttpRequest();
+    const xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             dates = JSON.parse(this.responseText);
             updateDates();
         }
@@ -90,20 +89,20 @@ function accept() {
 }
 
 function acceptTC() {
-    var xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var header = document.getElementsByTagName('h1')[0];
+        if (this.readyState === 4 && this.status === 200) {
+            const header = document.getElementsByTagName('h1')[0];
             document.body.innerHTML = '';
             document.body.appendChild(header);
             document.body.innerHTML += this.responseText;
         } else {
-            var para = document.createElement("p");
-            para.innerHTML = "Accept T&C?";
-            var but = document.createElement("button");
+            const para = document.createElement("p");
+            para.textContent = "Accept T&C?";
+            const but = document.createElement("button");
             but.onclick = accept;
-            but.innerHTML = "Yes";
-            header = document.getElementsByTagName('h1')[0];
+            but.textContent = "Yes";
+            const header = document.getElementsByTagName('h1')[0];
             document.body.innerHTML = '';
             document.body.appendChild(header);
             document.body.appendChild(para);
@@ -120,29 +119,12 @@ function dog() {
 
 function displayDogImage(data) {
     document.body.innerHTML = "";
-    var picture = document.createElement("img");
-    picture.src = "/images/doggos/" + data.uri;
+    const picture = document.createElement("img");
+    picture.src = `/images/doggos/${data.uri}`;
     picture.alt = data.description;
     document.body.appendChild(picture);
-    var p = document.createElement("p");
-    p.innerHTML = data.description;
+    const p = document.createElement("p");
+    p.textContent = data.description;
     document.body.appendChild(p);
     setTimeout(dog, 10000);
-}
-
-function sendRequest(url) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var values = JSON.parse(this.responseText);
-            if (url === "/images.json") {
-                displayDogImage(values);
-            } else {
-                dates = values;
-                updateDates();
-            }
-        }
-    };
-    xhttp.open("GET", url, true);
-    xhttp.send();
 }
