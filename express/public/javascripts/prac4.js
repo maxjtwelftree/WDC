@@ -2,7 +2,7 @@ function getDateTask4_1() {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            document.getElementById("P1").innerHTML = `This page was last viewed ${this.responseText}`;
+            document.getElementById("P1").innerHTML = "This page was last viewed " + this.responseText;
         }
     };
     xhttp.open("GET", "/last.txt", true);
@@ -120,7 +120,7 @@ function dog() {
 function displayDogImage(data) {
     document.body.innerHTML = "";
     const picture = document.createElement("img");
-    picture.src = `/images/doggos/${data.uri}`;
+    picture.src = "/images/doggos/" + data.uri;
     picture.alt = data.description;
     document.body.appendChild(picture);
     const p = document.createElement("p");
